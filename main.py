@@ -184,10 +184,7 @@ class Window(Frame):
             NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
             NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
             checkLandlordWork()
-            print(getDeltaDate())
-            print(Checkbutton1.get())
-            print(int(len(NewTenant.getRentBase())))
-            print(NewTenant.getLandlordWorkExist())
+
 
             # Initiate LOI and LA
             PopulateLOI.initDirectories()
