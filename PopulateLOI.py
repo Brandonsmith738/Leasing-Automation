@@ -11,8 +11,12 @@ from docxtpl import DocxTemplate, InlineImage
 p = inflect.engine()
 
 def initDirectories():
-    if not os.path.exists(NewTenant.getTenant()):
-        os.mkdir(NewTenant.getTenant())
+    try:
+        if not os.path.exists(NewTenant.getTenant()):
+            os.mkdir(NewTenant.getTenant())
+    except:
+        print("Invalid Business Name")
+
 
 def createTemplate():
     template = DocxTemplate('LOI_Template.docx')
@@ -73,5 +77,8 @@ def createTemplate():
                'tenant_finish_exists_title': tenant_finish_exists_title,
                'tenant_finish_exists': tenant_finish_exists,
                }
-    template.render(context)
-    template.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + "LOI.docx")
+    try:
+        template.render(context)
+        template.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + "LOI.docx")
+    except:
+        print("LOI Error")

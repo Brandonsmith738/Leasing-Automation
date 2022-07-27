@@ -107,9 +107,8 @@ class Window(Frame):
         BaseRentEntry.pack(side=RIGHT)
         BaseRentEntry.place(relx=0.85, rely=0)
 
-        PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
-        PushBaseRent.place(x=1023, y=30)
-
+        BaseRentButton = Button(self, text='Add Base Rent', command=pushToBaseRentList, bg='orange', fg='white')
+        BaseRentButton.place(x=1100, y=30)
         # Row 2
         TermLengthLabel = Label(root, text="Term Length (yrs)")
         TermLengthLabel.pack(side=LEFT)
@@ -158,11 +157,14 @@ class Window(Frame):
 
         # Calculates the difference from today to commencement
         def getDeltaDate():
-            d0 = date(int(str(TenantData.getTodayYear())), TenantData.getTodayMonth(), TenantData.getToday())
-            d1 = date(int('20'+cal.get_date()[5:7]), int(cal.get_date()[0:1]), int(cal.get_date()[2:4]))
-            DeltaDate = str(d1 - d0)
-            deltaDateIndex = DeltaDate.index(' ')
-            return DeltaDate[0:deltaDateIndex]
+            try:
+                d0 = date(int(str(TenantData.getTodayYear())), TenantData.getTodayMonth(), TenantData.getToday())
+                d1 = date(int('20'+cal.get_date()[5:7]), int(cal.get_date()[0:1]), int(cal.get_date()[2:4]))
+                DeltaDate = str(d1 - d0)
+                deltaDateIndex = DeltaDate.index(' ')
+                return DeltaDate[0:deltaDateIndex]
+            except:
+                print("Invalid Date Entered")
 
         # Checks if there exists text in landlord work textbox
         def checkLandlordWork():
@@ -172,18 +174,21 @@ class Window(Frame):
         # getter function for the Data required to make documents
         def getData():
             # Set data
-            NewTenant.setTenant(TenantEntry.get())
-            NewTenant.setFirstName(LeadFirstNameEntry.get())
-            NewTenant.setSpaceAddress(SpaceLocationEntry.get())
-            NewTenant.setLeaseTerm(TermLengthEntry.get())
-            NewTenant.setSpaceLocation(PropertiesDropdown.get())
-            NewTenant.setPossessionDate(cal.get_date())
-            NewTenant.setDeltaDate(int(getDeltaDate()))
-            NewTenant.setTenantWork(TenantWorkEntry.get("1.0",'end-1c'))
-            NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0",'end-1c'))
-            NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
-            NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
-            checkLandlordWork()
+            try:
+                NewTenant.setTenant(TenantEntry.get())
+                NewTenant.setFirstName(LeadFirstNameEntry.get())
+                NewTenant.setSpaceAddress(SpaceLocationEntry.get())
+                NewTenant.setLeaseTerm(TermLengthEntry.get())
+                NewTenant.setSpaceLocation(PropertiesDropdown.get())
+                NewTenant.setPossessionDate(cal.get_date())
+                NewTenant.setDeltaDate(int(getDeltaDate()))
+                NewTenant.setTenantWork(TenantWorkEntry.get("1.0",'end-1c'))
+                NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0",'end-1c'))
+                NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
+                NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
+                checkLandlordWork()
+            except:
+                print("(Entry Error)")
 
 
             # Initiate LOI and LA
@@ -191,13 +196,13 @@ class Window(Frame):
             LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
             PopulateLOI.createTemplate()
 
-        ExecuteButton = Button(self, text='Execute Automation', command=getData)
+        ExecuteButton = Button(self, text='Calculate', command=getData, width=20, height=5, bg='blue', fg='white')
         ExecuteButton.place(x=1055,y=550)
 
     def client_exit(self):
         exit()
 
 root = Tk()
-root.geometry("1200x600")
+root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 app = Window(root)
 root.mainloop()
