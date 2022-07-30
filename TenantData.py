@@ -18,6 +18,7 @@ todays_date = today.strftime("%B %d, %Y")
 class Tenant():
     def __init__(self):
         self._Property = 0
+        self._FirstMonthBase = 0
         self._PropertySF = 0
         self._FirstName = 0
         self._Tenant = 0
@@ -154,5 +155,9 @@ class Tenant():
         self._LandlordWorkExist = x
     def getLandlordWorkExist(self):
         return self._LandlordWorkExist
+    def setFirstMonthBase(self, x):
+        self._FirstMonthBase = x
+    def getFirstMonthBase(self):
+        return self._FirstMonthBase
 
 NewTenant = Tenant()
