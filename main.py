@@ -87,18 +87,18 @@ class Window(Frame):
         drop.place(relx=0.63, rely=0)
         print(choices.index(PropertiesDropdown.get()))
 
-        def pushToBaseRentList():
-            # Append each entry onto the NewTenant Obj
-            NewTenant.appendRentSqft(BaseRentEntry.get())
-            # For development
-            print(NewTenant.getRentBase())
-            # Here we loop through the list of base rent, we are displaying it onto the GUI
-            # This will actually be DELETED. NEW PROJECT: Giant Linear Algebra problem that gives the below as possible solutions
-            # Problem,,,,, How to show the possible solutions with Tkinter
-            for i in range(int(len(NewTenant.getRentBase()))):
-                ShowBaseRentList = Label(root, text='Year '+str(i+1)+'      '+str(NewTenant.getRentBaseElement(i)))
-                ShowBaseRentList.pack(side=LEFT)
-                ShowBaseRentList.place(relx=0.85, rely=0.1+(i/40))
+        # def pushToBaseRentList():
+        #     # Append each entry onto the NewTenant Obj
+        #     NewTenant.appendRentSqft(BaseRentEntry.get())
+        #     # For development
+        #     print(NewTenant.getRentBase())
+        #     # Here we loop through the list of base rent, we are displaying it onto the GUI
+        #     # This will actually be DELETED. NEW PROJECT: Giant Linear Algebra problem that gives the below as possible solutions
+        #     # Problem,,,,, How to show the possible solutions with Tkinter
+        #     for i in range(int(len(NewTenant.getRentBase()))):
+        #         ShowBaseRentList = Label(root, text='Year '+str(i+1)+'      '+str(NewTenant.getRentBaseElement(i)))
+        #         ShowBaseRentList.pack(side=LEFT)
+        #         ShowBaseRentList.place(relx=0.85, rely=0.1+(i/40))
 
         BaseRentLabel = Label(root, text="Yearly Base Rent")
         BaseRentLabel.pack(side=LEFT)
@@ -107,8 +107,8 @@ class Window(Frame):
         BaseRentEntry.pack(side=RIGHT)
         BaseRentEntry.place(relx=0.85, rely=0)
 
-        PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
-        PushBaseRent.place(x=1023, y=30)
+        # PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
+        # PushBaseRent.place(x=1023, y=30)
 
         # Row 2
         TermLengthLabel = Label(root, text="Term Length (yrs)")
@@ -163,6 +163,8 @@ class Window(Frame):
             DeltaDate = str(d1 - d0)
             deltaDateIndex = DeltaDate.index(' ')
             return DeltaDate[0:deltaDateIndex]
+
+
 
         # Checks if there exists text in landlord work textbox
         def checkLandlordWork():
