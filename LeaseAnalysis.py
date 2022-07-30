@@ -33,8 +33,9 @@ def createTemplate(PropertyIndex):
     print(possibleValues)
 
 
+    # C43 is negative so we subtract to make it positive
     def calculateFirstMonthTerm(ROI):
-        x0 = ((1 / (1 - sheet.range('C15').value)) * (ROI * float(sheet.range('C53').value) * n + sheet.range('C43').value * n)
+        x0 = ((1 / (1 - sheet.range('C15').value)) * (ROI * float(sheet.range('C53').value) * n - sheet.range('C43').value * n)
               - step * (0.5 * (n - 1) * n)) / (n * (1 - (1 / (12 * n * sheet.range('C11').value * (1 - sheet.range('C15').value)))))
 
         return x0
