@@ -24,6 +24,7 @@ def createTemplate():
     tenant_finish_exists_title = ""
     tenant_finish_exists = ""
     landlord_work_title = ""
+    signage_exists_title = ""
 
     for i in range(int(NewTenant.getLeaseTerm())):
         lease_year_col.append({
@@ -39,9 +40,11 @@ def createTemplate():
             tenant_finish_col.append(tenant_finish_list[i])
         tenant_finish_exists_title = "Tenant Finish:"
         tenant_finish_exists = "Landlord will provide to Tenant, within thirty (30) days after Tenant’s Work is complete, a Construction Allowance of up to " + str(NewTenant.getLandlordTI()) + " payable to Tenant upon receipt of the following:"
-    # if statement checking if landlord work exists
+    # if statement checking if landlord work and signage exists, then setting title to not be init blank
     if (NewTenant.getLandlordWorkExist()):
         landlord_work_title = "Landlord's Work:"
+    if (NewTenant.getSignageExists()):
+        signage_exists_title = "Signage:"
     def LA_O18_to_words():
         index = str(NewTenant.getSecurityDeposit()).index('.')
         ToWordsEnding = str(NewTenant.getSecurityDeposit())[index+1:len(str(NewTenant.getSecurityDeposit()))]+'/100'
@@ -72,6 +75,8 @@ def createTemplate():
                'tenant_finish_col': tenant_finish_col,
                'tenant_finish_exists_title': tenant_finish_exists_title,
                'tenant_finish_exists': tenant_finish_exists,
+               'signage_exists_title': signage_exists_title,
+               'signage': NewTenant.getSignage(),
                }
     template.render(context)
     template.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + "LOI.docx")

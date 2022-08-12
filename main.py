@@ -138,6 +138,14 @@ class Window(Frame):
         ExtraContingencyEntry = Text(root, height=5, width=52)
         ExtraContingencyEntry.pack(side=RIGHT)
         ExtraContingencyEntry.place(relx=0.1, rely=0.6)
+
+        # Signage entry
+        SignageLabel = Label(root, text="Signage: ")
+        SignageLabel.pack(side=LEFT)
+        SignageLabel.place(relx=0, rely=0.8)
+        SignageEntry = Text(root, height=5, width=52)
+        SignageEntry.pack(side=RIGHT)
+        SignageEntry.place(relx=0.1, rely=0.8)
         # Check button for Tenant finish ?
         Checkbutton1 = BooleanVar()
 
@@ -167,9 +175,11 @@ class Window(Frame):
 
 
         # Checks if there exists text in landlord work textbox
-        def checkLandlordWork():
+        def checkIfExists():
             if len(LandlordWorkEntry.get("1.0", 'end-1c')) >= 1:
                 NewTenant.setLandlordWorkExist(True)
+            if len(SignageEntry.get("1.0", 'end-1c')) >= 1:
+                NewTenant.setSignageExists(True)
 
         # getter function for the Data required to make documents
         def getData():
@@ -184,8 +194,10 @@ class Window(Frame):
             NewTenant.setTenantWork(TenantWorkEntry.get("1.0",'end-1c'))
             NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0",'end-1c'))
             NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
+            NewTenant.setSignage(SignageEntry.get("1.0",'end-1c'))
             NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
-            checkLandlordWork()
+
+            checkIfExists()
 
 
             # Initiate LOI and LA
