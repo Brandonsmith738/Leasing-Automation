@@ -4,6 +4,7 @@ from datetime import date
 from tkinter import *
 from tkcalendar import Calendar
 import PopulateLOI
+import Populate_Lease_Info
 import TenantData
 from TenantData import NewTenant
 import LeaseAnalysis
@@ -200,10 +201,11 @@ class Window(Frame):
             checkIfExists()
 
 
-            # Initiate LOI and LA
+            # Initiate LOI, LA, and LI
             PopulateLOI.initDirectories()
             LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
             PopulateLOI.createTemplate()
+            Populate_Lease_Info.createTemplate()
 
         ExecuteButton = Button(self, text='Execute Automation', command=getData)
         ExecuteButton.place(x=1055,y=550)
