@@ -106,6 +106,9 @@ class Window(Frame):
         BaseRentEntry = Entry(root, bd=5)
         BaseRentEntry.pack(side=RIGHT)
         BaseRentEntry.place(relx=0.63, rely=.01)
+        
+        # PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
+        # PushBaseRent.place(x=1023, y=30)
 
         # Row 2
         TermLengthLabel = Label(root, text="Term Length (yrs)", font=('Times', 12))
