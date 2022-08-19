@@ -138,6 +138,16 @@ class Window(Frame):
         ExtraContingencyEntry = Text(root, height=5, width=52)
         ExtraContingencyEntry.pack(side=RIGHT)
         ExtraContingencyEntry.place(relx=0.46, rely=0.15)
+        
+        # Signage entry
+        SignageLabel = Label(root, text="Signage: ")
+        SignageLabel.pack(side=LEFT)
+        SignageLabel.place(relx=0, rely=0.8)
+        SignageEntry = Text(root, height=5, width=52)
+        SignageEntry.pack(side=RIGHT)
+        SignageEntry.place(relx=0.1, rely=0.8)
+        # Check button for Tenant finish ?
+        Checkbutton1 = BooleanVar()
         # Check button for Tenant finish ?
         Checkbutton1 = BooleanVar()
 
@@ -196,6 +206,7 @@ class Window(Frame):
             PopulateLOI.initDirectories()
             LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
             PopulateLOI.createTemplate()
+            Populate_Lease_Info.createTemplate()
 
         CalculateButton = Button(self, command=getData, width=400, height=30, bg='orange')
         CalculateButton.place(relx=0, rely=.75)
