@@ -27,6 +27,8 @@ def createTemplate(PropertyIndex):
 
         NewTenant.setLandlordTI(sheet.range('C12').value)
         NewTenant.setSecurityDepost(proposal.range('O18').value)
+    except:
+        print("Save Error (Excel Update)")
         
     n = float(NewTenant.getLeaseTerm())
     step = 0.5
@@ -58,5 +60,3 @@ def createTemplate(PropertyIndex):
 
         wb.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + 'LA.xlsx')
         wb.close()
-    except:
-        print("Save Error (Excel Update)")

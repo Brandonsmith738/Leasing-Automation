@@ -70,17 +70,17 @@ class Window(Frame):
 
         LeadFirstNameLabel = Label(root, text="Lead First Name", font=('Times', 12))
         LeadFirstNameLabel.pack(side=LEFT)
-        LeadFirstNameLabel.place(relx=0.24, rely=.01)
+        LeadFirstNameLabel.place(relx=0.23, rely=.01)
         LeadFirstNameEntry = Entry(root, bd=5)
         LeadFirstNameEntry.pack(side=RIGHT)
-        LeadFirstNameEntry.place(relx=0.29, rely=.01)
+        LeadFirstNameEntry.place(relx=0.28, rely=.01)
 
         SpaceLocationLabel = Label(root, text="Space Address", font=('Times', 12))
         SpaceLocationLabel.pack(side=LEFT)
-        SpaceLocationLabel.place(relx=0.39, rely=.01)
+        SpaceLocationLabel.place(relx=0.38, rely=.01)
         SpaceLocationEntry = Entry(root, bd=5)
         SpaceLocationEntry.pack(side=RIGHT)
-        SpaceLocationEntry.place(relx=0.44, rely=.01)
+        SpaceLocationEntry.place(relx=0.43, rely=.01)
 
         drop = OptionMenu(root, PropertiesDropdown, *choices)
         drop.pack()
@@ -102,10 +102,10 @@ class Window(Frame):
 
         BaseRentLabel = Label(root, text="Yearly Base Rent", font=('Times', 12))
         BaseRentLabel.pack(side=LEFT)
-        BaseRentLabel.place(relx=0.58, rely=.01)
+        BaseRentLabel.place(relx=0.57, rely=.01)
         BaseRentEntry = Entry(root, bd=5)
         BaseRentEntry.pack(side=RIGHT)
-        BaseRentEntry.place(relx=0.63, rely=.01)
+        BaseRentEntry.place(relx=0.62, rely=.01)
         
         # PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
         # PushBaseRent.place(x=1023, y=30)
@@ -113,10 +113,17 @@ class Window(Frame):
         # Row 2
         TermLengthLabel = Label(root, text="Term Length (yrs)", font=('Times', 12))
         TermLengthLabel.pack(side=LEFT)
-        TermLengthLabel.place(relx=.73, rely=.01)
+        TermLengthLabel.place(relx=.71, rely=.01)
         TermLengthEntry = Entry(root, bd=5)
         TermLengthEntry.pack(side=RIGHT)
-        TermLengthEntry.place(relx=0.78, rely=.01)
+        TermLengthEntry.place(relx=0.76, rely=.01)
+
+        ROILabel = Label(root, text= "ROI", font =('Times', 12))
+        ROILabel.pack(side=LEFT)
+        ROILabel.place(relx=.85, rely=.01)
+        ROIEntry = Entry(root, bd=5)
+        ROIEntry.pack(side=LEFT)
+        ROIEntry.place(relx=.87, rely=.01)
 
         LandlordWorkLabel = Label(root, text="Landlord's Work: ", font=('Times', 12))
         LandlordWorkLabel.pack(side=LEFT)
@@ -142,10 +149,10 @@ class Window(Frame):
         # Signage entry
         SignageLabel = Label(root, text="Signage: ")
         SignageLabel.pack(side=LEFT)
-        SignageLabel.place(relx=0, rely=0.8)
+        SignageLabel.place(relx=.42, rely=0.3)
         SignageEntry = Text(root, height=5, width=52)
         SignageEntry.pack(side=RIGHT)
-        SignageEntry.place(relx=0.1, rely=0.8)
+        SignageEntry.place(relx=0.46, rely=0.3)
         # Check button for Tenant finish ?
         Checkbutton1 = BooleanVar()
         # Check button for Tenant finish ?
@@ -157,14 +164,14 @@ class Window(Frame):
                               offvalue=0,
                               height=10,
                               width=20, font=('Times', 12))
-        TenantFinishCheckbox.place(relx=.47, rely=0.25)
+        TenantFinishCheckbox.place(relx=.75, rely=0.27)
 
         # Calendar for Commencement Days
         cal = Calendar(root, selectmode='day',
                        year=TenantData.getTodayYear(), month=TenantData.getTodayMonth(),
                        day=TenantData.getToday())
         cal.pack(padx=20)
-        cal.place(relx=0.75, rely=.18)
+        cal.place(relx=0.75, rely=.15)
 
         # Calculates the difference from today to commencement
         def getDeltaDate():
@@ -210,7 +217,7 @@ class Window(Frame):
 
         CalculateButton = Button(self, command=getData, width=400, height=30, bg='orange')
         CalculateButton.place(relx=0, rely=.75)
-        CalculateLabel = Label(root, text = 'Execute Automation', font=('Times, 100'), fg='white', bg='orange')
+        CalculateLabel = Label(root, text = 'Execute Automation', font=('Arial', 100), fg='white', bg='orange')
         CalculateLabel.place(relx=.275, rely=.8)
 
     def client_exit(self):

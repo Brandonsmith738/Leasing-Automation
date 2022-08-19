@@ -154,7 +154,7 @@ class Tenant():
         self._LandlordWorkExist = x
     def getLandlordWorkExist(self):
         return self._LandlordWorkExist
-        def setFirstMonthBase(self, x):
+    def setFirstMonthBase(self, x):
         self._FirstMonthBase = x
     def getFirstMonthBase(self):
         return self._FirstMonthBase
