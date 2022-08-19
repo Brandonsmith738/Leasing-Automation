@@ -86,6 +86,19 @@ class Window(Frame):
         drop.pack()
         drop.place(relx=0.5, rely=.01)
         print(choices.index(PropertiesDropdown.get()))
+        
+                # def pushToBaseRentList():
+        #     # Append each entry onto the NewTenant Obj
+        #     NewTenant.appendRentSqft(BaseRentEntry.get())
+        #     # For development
+        #     print(NewTenant.getRentBase())
+        #     # Here we loop through the list of base rent, we are displaying it onto the GUI
+        #     # This will actually be DELETED. NEW PROJECT: Giant Linear Algebra problem that gives the below as possible solutions
+        #     # Problem,,,,, How to show the possible solutions with Tkinter
+        #     for i in range(int(len(NewTenant.getRentBase()))):
+        #         ShowBaseRentList = Label(root, text='Year '+str(i+1)+'      '+str(NewTenant.getRentBaseElement(i)))
+        #         ShowBaseRentList.pack(side=LEFT)
+        #         ShowBaseRentList.place(relx=0.85, rely=0.1+(i/40))
 
         BaseRentLabel = Label(root, text="Yearly Base Rent", font=('Times', 12))
         BaseRentLabel.pack(side=LEFT)
