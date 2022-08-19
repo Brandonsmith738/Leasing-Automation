@@ -154,5 +154,17 @@ class Tenant():
         self._LandlordWorkExist = x
     def getLandlordWorkExist(self):
         return self._LandlordWorkExist
+        def setFirstMonthBase(self, x):
+        self._FirstMonthBase = x
+    def getFirstMonthBase(self):
+        return self._FirstMonthBase
+    def setSignageExists(self, x):
+        self._SignageExists = x
+    def getSignageExists(self):
+        return self._SignageExists
+    def setSignage(self, x):
+        self._Signage = x
+    def getSignage(self):
+        return self._Signage
 
 NewTenant = Tenant()
