@@ -46,6 +46,8 @@ def createTemplate():
     # if statement checking if landlord work exists
     if (NewTenant.getLandlordWorkExist()):
         landlord_work_title = "Landlord's Work:"
+    if (NewTenant.getSignageExists()):
+        signage_exists_title = "Signage:"
     def LA_O18_to_words():
         index = str(NewTenant.getSecurityDeposit()).index('.')
         ToWordsEnding = str(NewTenant.getSecurityDeposit())[index+1:len(str(NewTenant.getSecurityDeposit()))]+'/100'
