@@ -16,7 +16,7 @@ def createTemplate(PropertyIndex):
     sheet.range('C10').value = NewTenant.getLeaseTerm()
     sheet.range('C9').value = data.range('F' + str(PropertyIndex + 7)).value
     sheet.range('C5').value = data.range('A' + str(PropertyIndex + 7)).value
-
+    # Test
     # Pull total rent
     NewTenant.setTotalRent(proposal.range('I29').value)
     # Setting the property from drop down list
