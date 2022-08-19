@@ -25,7 +25,7 @@ def createTemplate(PropertyIndex):
     NewTenant.setTrippleNets(data.range('U' + str(PropertyIndex + 7)).value)
 
     NewTenant.setLandlordTI(sheet.range('C12').value)
-    NewTenant.setSecurityDepost(proposal.range('O18').value)
+    NewTenant.setSecurityDeposit(proposal.range('O18').value)
 
     n = float(NewTenant.getLeaseTerm())
     step = 0.5
