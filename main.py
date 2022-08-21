@@ -10,6 +10,7 @@ import LeaseAnalysis
 import QuerySalesforceLead
 import os, sys
 
+
 class Window(Frame):
     def __init__(self, master=None):
         # Init GUI
@@ -17,6 +18,9 @@ class Window(Frame):
         self.master = master
         self.init_window()
         self.TenantFN = ""
+
+    def client_exit(self):
+        exit()
 
     def init_window(self):
         # Packing TK GUI
@@ -86,8 +90,8 @@ class Window(Frame):
         drop.pack()
         drop.place(relx=0.5, rely=.01)
         print(choices.index(PropertiesDropdown.get()))
-        
-                # def pushToBaseRentList():
+
+        # def pushToBaseRentList():
         #     # Append each entry onto the NewTenant Obj
         #     NewTenant.appendRentSqft(BaseRentEntry.get())
         #     # For development
@@ -106,7 +110,7 @@ class Window(Frame):
         BaseRentEntry = Entry(root, bd=5)
         BaseRentEntry.pack(side=RIGHT)
         BaseRentEntry.place(relx=0.62, rely=.01)
-        
+
         # PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
         # PushBaseRent.place(x=1023, y=30)
 
@@ -118,7 +122,7 @@ class Window(Frame):
         TermLengthEntry.pack(side=RIGHT)
         TermLengthEntry.place(relx=0.76, rely=.01)
 
-        ROILabel = Label(root, text= "ROI", font =('Times', 12))
+        ROILabel = Label(root, text="ROI", font=('Times', 12))
         ROILabel.pack(side=LEFT)
         ROILabel.place(relx=.85, rely=.01)
         ROIEntry = Entry(root, bd=5)
@@ -145,7 +149,7 @@ class Window(Frame):
         ExtraContingencyEntry = Text(root, height=5, width=52)
         ExtraContingencyEntry.pack(side=RIGHT)
         ExtraContingencyEntry.place(relx=0.46, rely=0.15)
-        
+
         # Signage entry
         SignageLabel = Label(root, text="Signage: ")
         SignageLabel.pack(side=LEFT)
@@ -159,11 +163,11 @@ class Window(Frame):
         Checkbutton1 = BooleanVar()
 
         TenantFinishCheckbox = Checkbutton(root, text="Tenant Finish?",
-                              variable=Checkbutton1,
-                              onvalue=1,
-                              offvalue=0,
-                              height=10,
-                              width=20, font=('Times', 12))
+                                           variable=Checkbutton1,
+                                           onvalue=1,
+                                           offvalue=0,
+                                           height=10,
+                                           width=20, font=('Times', 12))
         TenantFinishCheckbox.place(relx=.75, rely=0.27)
 
         # Calendar for Commencement Days
@@ -177,7 +181,7 @@ class Window(Frame):
         def getDeltaDate():
             try:
                 d0 = date(int(str(TenantData.getTodayYear())), TenantData.getTodayMonth(), TenantData.getToday())
-                d1 = date(int('20'+cal.get_date()[5:7]), int(cal.get_date()[0:1]), int(cal.get_date()[2:4]))
+                d1 = date(int('20' + cal.get_date()[5:7]), int(cal.get_date()[0:1]), int(cal.get_date()[2:4]))
                 DeltaDate = str(d1 - d0)
                 deltaDateIndex = DeltaDate.index(' ')
                 return DeltaDate[0:deltaDateIndex]
@@ -200,30 +204,62 @@ class Window(Frame):
                 NewTenant.setSpaceLocation(PropertiesDropdown.get())
                 NewTenant.setPossessionDate(cal.get_date())
                 NewTenant.setDeltaDate(int(getDeltaDate()))
-                NewTenant.setTenantWork(TenantWorkEntry.get("1.0",'end-1c'))
-                NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0",'end-1c'))
-                NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
+                NewTenant.setTenantWork(TenantWorkEntry.get("1.0", 'end-1c'))
+                NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0", 'end-1c'))
+                NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0", 'end-1c'))
                 NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
                 checkLandlordWork()
             except:
                 print("(Entry Error)")
 
+        # getter function for the Data required to make documents
+    def getData():
+    # Set data
+        NewTenant.setTenant(TenantEntry.get())
+        NewTenant.setFirstName(LeadFirstNameEntry.get())
+        NewTenant.setSpaceAddress(SpaceLocationEntry.get())
+        NewTenant.setLeaseTerm(TermLengthEntry.get())
+        NewTenant.setSpaceLocation(PropertiesDropdown.get())
+        NewTenant.setPossessionDate(cal.get_date())
+        NewTenant.setDeltaDate(int(getDeltaDate()))
+        NewTenant.setTenantWork(TenantWorkEntry.get("1.0", 'end-1c'))
+        NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0", 'end-1c'))
+        NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0", 'end-1c'))
+        NewTenant.setSignage(SignageEntry.get("1.0", 'end-1c'))
+        NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
 
-            # Initiate LOI and LA
-            PopulateLOI.initDirectories()
-            LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
-            PopulateLOI.createTemplate()
-            Populate_Lease_Info.createTemplate()
-
-        CalculateButton = Button(self, command=getData, width=400, height=30, bg='orange')
-        CalculateButton.place(relx=0, rely=.75)
-        CalculateLabel = Label(root, text = 'Execute Automation', font=('Arial', 100), fg='white', bg='orange')
-        CalculateLabel.place(relx=.275, rely=.8)
-
-    def client_exit(self):
-        exit()
+        # Initiate LOI and LA
+        PopulateLOI.initDirectories()
+        LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
+        PopulateLOI.createTemplate()
+        Populate_Lease_Info.createTemplate()
 
 root = Tk()
 root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 app = Window(root)
+
+class MiniWindow(Frame):
+    def openNewWindow():
+        # Toplevel object which will
+        # be treated as a new window
+        newWindow = Toplevel(root)
+
+        newWindow.title("New Window")
+
+        # sets the geometry of the new window
+        newWindow.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
+
+        Label(newWindow,
+              text="Solutions Go Here").pack()
+        #Save button
+        SaveButton = Button(newWindow, width= 400, height=30, bg='blue')
+        SaveButton.place(relx=0, rely=.75)
+        SaveLabel = Label(newWindow, text='Save All Solutions', font=('Arial, 100'), fg='white', bg='blue')
+        SaveLabel.place(relx=.3, rely=.8)
+    #Calculate button
+    CalculateButton = Button(root, command=openNewWindow, width=400, height=30, bg='orange')
+    CalculateButton.place(relx=0, rely=.75)
+    CalculateLabel = Label(root, text='Calculate Solutions', font=('Arial', 100), fg='white', bg='orange')
+    CalculateLabel.place(relx=.275, rely=.8)
+
 root.mainloop()
