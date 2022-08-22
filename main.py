@@ -4,6 +4,7 @@ from datetime import date
 from tkinter import *
 from tkcalendar import Calendar
 import PopulateLOI
+import Populate_Lease_Info
 import TenantData
 from TenantData import NewTenant
 import LeaseAnalysis
@@ -153,12 +154,12 @@ class Window(Frame):
         # Signage entry
         SignageLabel = Label(root, text="Signage: ")
         SignageLabel.pack(side=LEFT)
+
         SignageLabel.place(relx=.42, rely=0.3)
         SignageEntry = Text(root, height=5, width=52)
         SignageEntry.pack(side=RIGHT)
         SignageEntry.place(relx=0.46, rely=0.3)
-        # Check button for Tenant finish ?
-        Checkbutton1 = BooleanVar()
+
         # Check button for Tenant finish ?
         Checkbutton1 = BooleanVar()
 
@@ -188,51 +189,49 @@ class Window(Frame):
             except:
                 print("Invalid Date Entered")
 
+
+
         # Checks if there exists text in landlord work textbox
-        def checkLandlordWork():
+        def checkIfExists():
             if len(LandlordWorkEntry.get("1.0", 'end-1c')) >= 1:
                 NewTenant.setLandlordWorkExist(True)
+            if len(SignageEntry.get("1.0", 'end-1c')) >= 1:
+                NewTenant.setSignageExists(True)
 
         # getter function for the Data required to make documents
         def getData():
             # Set data
-            try:
-                NewTenant.setTenant(TenantEntry.get())
-                NewTenant.setFirstName(LeadFirstNameEntry.get())
-                NewTenant.setSpaceAddress(SpaceLocationEntry.get())
-                NewTenant.setLeaseTerm(TermLengthEntry.get())
-                NewTenant.setSpaceLocation(PropertiesDropdown.get())
-                NewTenant.setPossessionDate(cal.get_date())
-                NewTenant.setDeltaDate(int(getDeltaDate()))
-                NewTenant.setTenantWork(TenantWorkEntry.get("1.0", 'end-1c'))
-                NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0", 'end-1c'))
-                NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0", 'end-1c'))
-                NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
-                checkLandlordWork()
-            except:
-                print("(Entry Error)")
+            
+        try:
+            NewTenant.setTenant(TenantEntry.get())
+            NewTenant.setFirstName(LeadFirstNameEntry.get())
+            NewTenant.setSpaceAddress(SpaceLocationEntry.get())
+            NewTenant.setLeaseTerm(TermLengthEntry.get())
+            NewTenant.setSpaceLocation(PropertiesDropdown.get())
+            NewTenant.setPossessionDate(cal.get_date())
+            NewTenant.setDeltaDate(int(getDeltaDate()))
+            NewTenant.setTenantWork(TenantWorkEntry.get("1.0",'end-1c'))
+            NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0",'end-1c'))
+            NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
+            NewTenant.setSignage(SignageEntry.get("1.0",'end-1c'))
+            NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
+         except:
+              print("(Entry Error)")
 
-        # getter function for the Data required to make documents
-    def getData():
-    # Set data
-        NewTenant.setTenant(TenantEntry.get())
-        NewTenant.setFirstName(LeadFirstNameEntry.get())
-        NewTenant.setSpaceAddress(SpaceLocationEntry.get())
-        NewTenant.setLeaseTerm(TermLengthEntry.get())
-        NewTenant.setSpaceLocation(PropertiesDropdown.get())
-        NewTenant.setPossessionDate(cal.get_date())
-        NewTenant.setDeltaDate(int(getDeltaDate()))
-        NewTenant.setTenantWork(TenantWorkEntry.get("1.0", 'end-1c'))
-        NewTenant.setLandlordWork(LandlordWorkEntry.get("1.0", 'end-1c'))
-        NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0", 'end-1c'))
-        NewTenant.setSignage(SignageEntry.get("1.0", 'end-1c'))
-        NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
+            checkIfExists()
 
-        # Initiate LOI and LA
-        PopulateLOI.initDirectories()
-        LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
-        PopulateLOI.createTemplate()
-        Populate_Lease_Info.createTemplate()
+
+            # Initiate LOI, LA, and LI
+            PopulateLOI.initDirectories()
+            LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
+            PopulateLOI.createTemplate()
+            Populate_Lease_Info.createTemplate()
+
+        ExecuteButton = Button(self, text='Execute Automation', command=getData)
+        ExecuteButton.place(x=1055,y=550)
+
+def client_exit(self):
+    exit()
 
 root = Tk()
 root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))

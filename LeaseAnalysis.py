@@ -8,8 +8,9 @@ def createTemplate(PropertyIndex):
     # Assign Space Square Feet
     # Initialize Template with xw
     # wb = xw.Book('Lease_Analysis_Template.xlsx')
+    
     try:
-        wb = xw.Book(r'C:\Users\GlocktorSeuss\OneDrive\Desktop\Work\Occidental\CodeCleanup\Lease_Analysis_Template.xlsx')
+        wb = xw.Book(r'C:\Users\Boomb\PycharmProjects\LeasingAutomationGui\Lease_Analysis_Template.xlsx')
         sheet = wb.sheets['Analysis']
         data = wb.sheets['Data Grid']
         proposal = wb.sheets['Proposal']
@@ -26,10 +27,16 @@ def createTemplate(PropertyIndex):
         NewTenant.setTrippleNets(data.range('U' + str(PropertyIndex + 7)).value)
 
         NewTenant.setLandlordTI(sheet.range('C12').value)
-        NewTenant.setSecurityDepost(proposal.range('O18').value)
-    except:
+        NewTenant.setSecurityDeposit(proposal.range('O18').value)
+
+        n = float(NewTenant.getLeaseTerm())
+        step = 0.5
+        possibleValues = np.arange(0, 201)*0.25
+        
+     except:
         print("Save Error (Excel Update)")
         
+=======
     n = float(NewTenant.getLeaseTerm())
     step = 0.5
     possibleValues = np.arange(0, 201)*0.25

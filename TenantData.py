@@ -18,6 +18,7 @@ todays_date = today.strftime("%B %d, %Y")
 class Tenant():
     def __init__(self):
         self._Property = 0
+        self._FirstMonthBase = 0
         self._PropertySF = 0
         self._FirstName = 0
         self._Tenant = 0
@@ -34,10 +35,12 @@ class Tenant():
         self._TenantWork = ""
         self._LandlordWork = ""
         self._ExtraConstingency = ""
+        self._Signage = ""
         self._LandlordTI = 0
         self._SecurityDeposit = 0
         self._TenantFinishCheckbox = False
         self._LandlordWorkExist = False
+        self._SignageExists = False
 
     #     Tenant Rent Table
         self._rent_sqft = []
