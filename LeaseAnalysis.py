@@ -8,25 +8,35 @@ def createTemplate(PropertyIndex):
     # Assign Space Square Feet
     # Initialize Template with xw
     # wb = xw.Book('Lease_Analysis_Template.xlsx')
-    wb = xw.Book(r'C:\Users\Boomb\PycharmProjects\LeasingAutomationGui\Lease_Analysis_Template.xlsx')
-    sheet = wb.sheets['Analysis']
-    data = wb.sheets['Data Grid']
-    proposal = wb.sheets['Proposal']
-    sheet.range('C7').value = NewTenant.getTenant()
-    sheet.range('C10').value = NewTenant.getLeaseTerm()
-    sheet.range('C9').value = data.range('F' + str(PropertyIndex + 7)).value
-    sheet.range('C5').value = data.range('A' + str(PropertyIndex + 7)).value
-    # Test
-    # Pull total rent
-    NewTenant.setTotalRent(proposal.range('I29').value)
-    # Setting the property from drop down list
-    NewTenant.setPropertySF(sheet.range('C9').value)
-    NewTenant.setProperty(data.range('A' + str(PropertyIndex + 7)).value)
-    NewTenant.setTrippleNets(data.range('U' + str(PropertyIndex + 7)).value)
+    
+    try:
+        wb = xw.Book(r'C:\Users\Boomb\PycharmProjects\LeasingAutomationGui\Lease_Analysis_Template.xlsx')
+        sheet = wb.sheets['Analysis']
+        data = wb.sheets['Data Grid']
+        proposal = wb.sheets['Proposal']
+        sheet.range('C7').value = NewTenant.getTenant()
+        sheet.range('C10').value = NewTenant.getLeaseTerm()
+        sheet.range('C9').value = data.range('F' + str(PropertyIndex + 7)).value
+        sheet.range('C5').value = data.range('A' + str(PropertyIndex + 7)).value
+        # Test
+        # Pull total rent
+        NewTenant.setTotalRent(proposal.range('I29').value)
+        # Setting the property from drop down list
+        NewTenant.setPropertySF(sheet.range('C9').value)
+        NewTenant.setProperty(data.range('A' + str(PropertyIndex + 7)).value)
+        NewTenant.setTrippleNets(data.range('U' + str(PropertyIndex + 7)).value)
 
-    NewTenant.setLandlordTI(sheet.range('C12').value)
-    NewTenant.setSecurityDeposit(proposal.range('O18').value)
+        NewTenant.setLandlordTI(sheet.range('C12').value)
+        NewTenant.setSecurityDeposit(proposal.range('O18').value)
 
+        n = float(NewTenant.getLeaseTerm())
+        step = 0.5
+        possibleValues = np.arange(0, 201)*0.25
+        
+     except:
+        print("Save Error (Excel Update)")
+        
+=======
     n = float(NewTenant.getLeaseTerm())
     step = 0.5
     possibleValues = np.arange(0, 201)*0.25
@@ -55,5 +65,5 @@ def createTemplate(PropertyIndex):
         NewTenant.appendTotalMonthly(proposal.range('G' + str(i + 18)).value)
         NewTenant.appendTotalYearly(proposal.range('I' + str(i + 18)).value)
 
-    wb.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + 'LA.xlsx')
-    wb.close()
+        wb.save(NewTenant.getTenant() + "/" + NewTenant.getTenant() + 'LA.xlsx')
+        wb.close()
