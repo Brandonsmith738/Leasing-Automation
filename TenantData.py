@@ -147,7 +147,7 @@ class Tenant():
         return self._LandlordTI
     def getSecurityDeposit(self):
         return self._SecurityDeposit
-    def setSecurityDepost(self, x):
+    def setSecurityDeposit(self, x):
         self._SecurityDeposit = x
     def setTenantFinishCheckbox(self, x):
         self._TenantFinishCheckbox = x
