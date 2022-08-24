@@ -8,6 +8,7 @@ import Populate_Lease_Info
 import TenantData
 from TenantData import NewTenant
 import LeaseAnalysis
+from PyPDF2 import PdfReader
 import QuerySalesforceLead
 import os, sys
 
@@ -34,6 +35,9 @@ class Window(Frame):
 
         # Create a Tkinter variable
         PropertiesDropdown = StringVar(root)
+        ORGTypeDropdown = StringVar(root)
+
+        ORGTypeDropdown.set(NewTenant.getORGType(0))
 
         # Dictionary with options // This can be looped through LA doc in the future
         choices = ['21 Webb',
@@ -101,12 +105,12 @@ class Window(Frame):
         #         ShowBaseRentList.pack(side=LEFT)
         #         ShowBaseRentList.place(relx=0.85, rely=0.1+(i/40))
 
-        BaseRentLabel = Label(root, text="Yearly Base Rent")
-        BaseRentLabel.pack(side=LEFT)
-        BaseRentLabel.place(relx=0.76, rely=0)
-        BaseRentEntry = Entry(root, bd=5)
-        BaseRentEntry.pack(side=RIGHT)
-        BaseRentEntry.place(relx=0.85, rely=0)
+        ROILabel = Label(root, text="ROI: ")
+        ROILabel.pack(side=LEFT)
+        ROILabel.place(relx=0.76, rely=0)
+        ROIEntry = Entry(root, bd=5)
+        ROIEntry.pack(side=RIGHT)
+        ROIEntry.place(relx=0.79, rely=0)
 
         # PushBaseRent = Button(self, text='Add Base Rent', command=pushToBaseRentList)
         # PushBaseRent.place(x=1023, y=30)
@@ -118,6 +122,27 @@ class Window(Frame):
         TermLengthEntry = Entry(root, bd=5)
         TermLengthEntry.pack(side=RIGHT)
         TermLengthEntry.place(relx=0.11, rely=0.1)
+
+        ORGTypeLabel = Label(root, text="Org Type of Tenant:")
+        ORGTypeLabel.pack(side=LEFT)
+        ORGTypeLabel.place(relx=0.45, rely=0.1)
+        ORGTypeDrop = OptionMenu(root, ORGTypeDropdown, *NewTenant.getORGTypeList())
+        ORGTypeDrop.pack()
+        ORGTypeDrop.place(relx=0.55, rely=0.1)
+
+        LeasedPremiseLabel = Label(root, text="Leased Premise:")
+        LeasedPremiseLabel.pack(side=LEFT)
+        LeasedPremiseLabel.place(relx=0.63, rely=0.1)
+        LeasedPremiseEntry = Entry(root, bd=5)
+        LeasedPremiseEntry.pack(side=RIGHT)
+        LeasedPremiseEntry.place(relx=0.71, rely=0.1)
+
+        LeasedAreaLabel = Label(root, text="Leased Area:")
+        LeasedAreaLabel.pack(side=LEFT)
+        LeasedAreaLabel.place(relx=0.45, rely=0.2)
+        LeasedAreaEntry = Entry(root, bd=5)
+        LeasedAreaEntry.pack(side=RIGHT)
+        LeasedAreaEntry.place(relx=0.52, rely=0.2)
 
         LandlordWorkLabel = Label(root, text="Landlord's Work: ")
         LandlordWorkLabel.pack(side=LEFT)
@@ -197,6 +222,15 @@ class Window(Frame):
             NewTenant.setExtraConstingency(ExtraContingencyEntry.get("1.0",'end-1c'))
             NewTenant.setSignage(SignageEntry.get("1.0",'end-1c'))
             NewTenant.setTenantFinishCheckbox(Checkbutton1.get())
+            NewTenant.setROI(float(ROIEntry.get()))
+            NewTenant.setLeasedPremise(LeasedPremiseEntry.get())
+            NewTenant.setLeasedArea(float(LeasedAreaEntry.get()))
+            if(ORGTypeDropdown.get() == "LLC."):
+                NewTenant.setORGType(1)
+                print(ORGTypeDropdown.get())
+            elif (ORGTypeDropdown.get() == "Inc."):
+                NewTenant.setORGType(0)
+                print(ORGTypeDropdown.get())
 
             checkIfExists()
 

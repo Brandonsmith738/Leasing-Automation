@@ -38,7 +38,7 @@ def createTemplate(PropertyIndex):
               - step * (0.5 * (n - 1) * n)) / (n * (1 - (1 / (12 * n * sheet.range('C11').value * (1 - sheet.range('C15').value)))))
         return x0
 
-    differenceArray = np.absolute(possibleValues - calculateFirstMonthTerm(0.15))
+    differenceArray = np.absolute(possibleValues - calculateFirstMonthTerm(NewTenant.getROI()))
     index = differenceArray.argmin()
     NewTenant.setFirstMonthBase(possibleValues[index])
     # Appends from the initial base rent += step_size up to i=n. This pushes to one array in NewTenant

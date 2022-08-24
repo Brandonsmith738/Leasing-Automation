@@ -36,11 +36,16 @@ class Tenant():
         self._LandlordWork = ""
         self._ExtraConstingency = ""
         self._Signage = ""
+        self._LeasedPremise = ""
         self._LandlordTI = 0
         self._SecurityDeposit = 0
         self._TenantFinishCheckbox = False
         self._LandlordWorkExist = False
         self._SignageExists = False
+        self._ROI = 0
+        self._ORGType = ['Inc.','LLC.']
+        self._ORGTypeSelected = ""
+        self._LeasedArea = 0
 
     #     Tenant Rent Table
         self._rent_sqft = []
@@ -169,5 +174,25 @@ class Tenant():
         self._Signage = x
     def getSignage(self):
         return self._Signage
+    def setROI(self, x):
+        self._ROI = x/100
+    def getROI(self):
+        return self._ROI
+    def setORGType(self, x):
+        self._ORGTypeSelected = self._ORGType[x]
+    def getORGType(self, x):
+        return self._ORGType[x]
+    def getORGTypeList(self):
+        return self._ORGType
+    def getORGTypeSelected(self):
+        return self._ORGTypeSelected
+    def setLeasedPremise(self, x):
+        self._LeasedPremise = x
+    def getLeasedPremise(self):
+        return self._LeasedPremise
+    def setLeasedArea(self, x):
+        self._LeasedArea = x
+    def getLeasedArea(self):
+        return self._LeasedArea
 
 NewTenant = Tenant()
