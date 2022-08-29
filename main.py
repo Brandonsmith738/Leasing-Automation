@@ -3,6 +3,8 @@ import tkcalendar
 from datetime import date
 from tkinter import *
 from tkcalendar import Calendar
+
+import PopulateCI
 import PopulateLOI
 import Populate_Lease_Info
 import TenantData
@@ -240,6 +242,7 @@ class Window(Frame):
             LeaseAnalysis.createTemplate(choices.index(PropertiesDropdown.get()))
             PopulateLOI.createTemplate()
             Populate_Lease_Info.createTemplate()
+            PopulateCI.PopulateCI()
 
         ExecuteButton = Button(self, text='Execute Automation', command=getData)
         ExecuteButton.place(x=1055,y=550)
